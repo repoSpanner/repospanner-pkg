@@ -1,11 +1,12 @@
 #!/bin/bash -xe
 VERSION="0.5"
-GITREV="$(GIT_DIR=~/src/repoSpanner git git rev-parse HEAD)"
+GITREV="$(GIT_DIR=~/src/repoSpanner/.git git rev-parse HEAD)"
 (
 	cd ~/src/repoSpanner
 	trap "rm -rf repoSpanner-${VERSION}" EXIT
+	FILES="`ls`"
 	mkdir repoSpanner-${VERSION}
-	cp -r * repoSpanner-${VERSION}
+	cp -r $FILES repoSpanner-${VERSION}
 	# Delete binaries
 	rm -f repoSpanner-${VERSION}/{repospanner,repohookrunner,repobridge}
 	(

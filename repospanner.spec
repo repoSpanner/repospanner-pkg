@@ -7,7 +7,7 @@
 
 
 %global goipath         repospanner.org/repospanner
-%global gcommit         f38383546f7ce0e88ec7b9c5bf7959521af2c941
+%global gcommit         7e4a11255b00b8e25e542feedb35ca957edc0763
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=995136#c12
 %global _dwz_low_mem_die_limit 0
@@ -19,7 +19,7 @@
 %define dist .el7.infra
 
 Name:           repoSpanner
-Version:        0.4
+Version:        0.5
 Release:        1.%{gcommit}%{?dist}
 Summary:        repoSpanner is a distributed Git storage server
 
@@ -86,14 +86,9 @@ Common filesystem components
     rm -rf vendor/
 %endif
 
-mkdir -p ./_build/src/repospanner.org
-ln -s $(pwd) ./_build/src/repospanner.org/repospanner
-
-export GOPATH=$(pwd)/_build:%{gopath}
-
 # https://fedoraproject.org/wiki/PackagingDrafts/Go#Debuginfo
 function gobuild {
-	go build -a -ldflags "-B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \n') -X repospanner.org/repospanner/server/constants.version=%{version} -X repospanner.org/repospanner/server/constants.gitdescrip=%{release}" -v -x "$@";
+	go build -mod vendor -a -ldflags "-B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \n') -X repospanner.org/repospanner/server/constants.version=%{version} -X repospanner.org/repospanner/server/constants.gitdescrip=%{release}" -v -x "$@";
 }
 
 %if %{with server}
@@ -145,6 +140,12 @@ install %{SOURCE1} %{buildroot}%{_unitdir}
 %{_sysconfdir}/repospanner
 
 %changelog
+* Tue Mar 05 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-1.7e4a11255b00b8e25e542feedb35ca957edc0763.el7.infra
+- Improve hook running significantly
+- Make HTTP services not run during initialization
+- Allow group writing to repoSpanner files
+- Allow configuring bridge CA and baseurl from environment
+
 * Wed Feb 13 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 1.4-0.f38383546f7ce0e88ec7b9c5bf7959521af2c941
 - Start moving to contexts for request info
 - Add object listing to storage layer

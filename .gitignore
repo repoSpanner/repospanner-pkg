@@ -1,0 +1,6 @@
+*.log
+*.rpm
+*.tar.gz
+x86_64/
+noarch/
+/repoSpanner-*/

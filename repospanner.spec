@@ -92,7 +92,7 @@ function gobuild {
 }
 
 %if %{with server}
-    go generate ./...
+    go generate -mod vendor ./...
     for cmd in $(ls -1 cmd) ; do
         gobuild -o $cmd %{goipath}/cmd/$cmd
     done

@@ -21,5 +21,6 @@ mv ~/src/repoSpanner/repoSpanner-${VERSION}-${GITREV}.tar.gz .
 sed -i "s/%global gcommit.*\w/%global gcommit         ${GITREV}/" repospanner.spec
 rpmdev-bumpspec repospanner.spec --comment "$1"
 fedpkg --release epel7 prep
+vim repospanner.spec
 fedpkg --release epel7 srpm
 # rm -rf repoSpanner-${VERSION} repoSpanner-${VERSION}-${GITREV}.tar.gz

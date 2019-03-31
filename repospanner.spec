@@ -7,7 +7,7 @@
 
 
 %global goipath         repospanner.org/repospanner
-%global gcommit         53e9b9d8877236b3b2a553fbd62c1b496a838dce
+%global gcommit         18a344a268dd1cd8801b22c03781dafbfdb10937
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=995136#c12
 %global _dwz_low_mem_die_limit 0
@@ -20,7 +20,7 @@
 
 Name:           repoSpanner
 Version:        0.5
-Release:        5.%{gcommit}%{?dist}
+Release:        6.%{gcommit}%{?dist}
 Summary:        repoSpanner is a distributed Git storage server
 
 License:        BSD
@@ -140,6 +140,9 @@ install %{SOURCE1} %{buildroot}%{_unitdir}
 %{_sysconfdir}/repospanner
 
 %changelog
+* Sun Mar 31 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-6.18a344a268dd1cd8801b22c03781dafbfdb10937.el7.infra
+- Move object verification over to a BST
+
 * Sat Mar 30 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-5.53e9b9d8877236b3b2a553fbd62c1b496a838dce.el7.infra
 - Various fixes
 - Finally got to the BST todo

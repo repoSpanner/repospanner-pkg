@@ -4,7 +4,7 @@ GITREV="$(GIT_DIR=~/src/repoSpanner/.git git rev-parse HEAD)"
 (
 	cd ~/src/repoSpanner
 	trap "rm -rf repoSpanner-${VERSION}" EXIT
-	FILES="`ls`"
+	FILES="`ls | grep -v livetest`"
 	mkdir repoSpanner-${VERSION}
 	cp -r $FILES repoSpanner-${VERSION}
 	# Delete binaries

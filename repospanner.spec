@@ -7,7 +7,7 @@
 
 
 %global goipath         repospanner.org/repospanner
-%global gcommit         18a344a268dd1cd8801b22c03781dafbfdb10937
+%global gcommit         eeb960cb612a97201d88a7bd82c954fb9cf7ef44
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=995136#c12
 %global _dwz_low_mem_die_limit 0
@@ -20,7 +20,7 @@
 
 Name:           repoSpanner
 Version:        0.5
-Release:        6.%{gcommit}%{?dist}
+Release:        7.%{gcommit}%{?dist}
 Summary:        repoSpanner is a distributed Git storage server
 
 License:        BSD
@@ -140,6 +140,13 @@ install %{SOURCE1} %{buildroot}%{_unitdir}
 %{_sysconfdir}/repospanner
 
 %changelog
+* Sat Apr 13 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-7.eeb960cb612a97201d88a7bd82c954fb9cf7ef44.el7.infra
+- Stop syncing out raw deltas
+- Always send progress report
+- Use io.Copy
+- Fix orphan branch push
+- Fix HTTPS push
+
 * Sun Mar 31 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-6.18a344a268dd1cd8801b22c03781dafbfdb10937.el7.infra
 - Move object verification over to a BST
 

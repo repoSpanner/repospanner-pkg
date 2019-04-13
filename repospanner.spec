@@ -20,7 +20,7 @@
 
 Name:           repoSpanner
 Version:        0.5
-Release:        7.%{gcommit}%{?dist}
+Release:        8.%{gcommit}%{?dist}
 Summary:        repoSpanner is a distributed Git storage server
 
 License:        BSD
@@ -35,6 +35,7 @@ Requires: %{name}-filesystem = %{version}-%{release}
 # library is not available on ppc64le
 ExclusiveArch:  x86_64
 
+BuildRequires: git
 BuildRequires: golang
 BuildRequires: protobuf-compiler
 BuildRequires: golang-googlecode-goprotobuf
@@ -102,6 +103,12 @@ function gobuild {
 %endif
 
 
+%check
+%if %{with server}
+  go test -mod vendor ./...
+%endif
+
+
 %install
 mkdir -p %{buildroot}%{_libexecdir}
 mkdir -p %{buildroot}%{_sysconfdir}/repospanner
@@ -140,6 +147,9 @@ install %{SOURCE1} %{buildroot}%{_unitdir}
 %{_sysconfdir}/repospanner
 
 %changelog
+* Sat Apr 13 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-8.eeb960cb612a97201d88a7bd82c954fb9cf7ef44.el7.infra
+- Add test run
+
 * Sat Apr 13 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-7.eeb960cb612a97201d88a7bd82c954fb9cf7ef44.el7.infra
 - Stop syncing out raw deltas
 - Always send progress report

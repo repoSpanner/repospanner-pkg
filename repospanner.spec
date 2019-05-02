@@ -107,6 +107,8 @@ function gobuild {
 %if %{with server}
   git init
   git add .
+  git config user.name "build"
+  git config user.email "builder@localhost"
   git commit -sm "Commit for some metatesting"
   go test -mod vendor ./...
 %endif

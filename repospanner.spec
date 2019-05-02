@@ -7,7 +7,7 @@
 
 
 %global goipath         repospanner.org/repospanner
-%global gcommit         eeb960cb612a97201d88a7bd82c954fb9cf7ef44
+%global gcommit         e4df0439a0f696f71c1f2fee285dc2022d435839
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=995136#c12
 %global _dwz_low_mem_die_limit 0
@@ -20,7 +20,7 @@
 
 Name:           repoSpanner
 Version:        0.5
-Release:        8.%{gcommit}%{?dist}
+Release:        10.%{gcommit}%{?dist}
 Summary:        repoSpanner is a distributed Git storage server
 
 License:        BSD
@@ -105,6 +105,9 @@ function gobuild {
 
 %check
 %if %{with server}
+  git init
+  git add .
+  git commit -sm "Commit for some metatesting"
   go test -mod vendor ./...
 %endif
 
@@ -147,6 +150,13 @@ install %{SOURCE1} %{buildroot}%{_unitdir}
 %{_sysconfdir}/repospanner
 
 %changelog
+* Thu May 02 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-10.e4df0439a0f696f71c1f2fee285dc2022d435839.el7.infra
+- Fix race condition for sync db
+- Short-circuit push/sync process on error
+
+* Wed Apr 24 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-9.83513459fcd79815be14c0740251b5902e93f688.el7.infra
+- Move some log entries to Info
+
 * Sat Apr 13 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-8.eeb960cb612a97201d88a7bd82c954fb9cf7ef44.el7.infra
 - Add test run
 

@@ -7,7 +7,7 @@
 
 
 %global goipath         repospanner.org/repospanner
-%global gcommit         e4df0439a0f696f71c1f2fee285dc2022d435839
+%global gcommit         c6a026e428baaa9b34c8fd54a6f1c0a6f2ae062e
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=995136#c12
 %global _dwz_low_mem_die_limit 0
@@ -20,7 +20,7 @@
 
 Name:           repoSpanner
 Version:        0.5
-Release:        10.%{gcommit}%{?dist}
+Release:        11.%{gcommit}%{?dist}
 Summary:        repoSpanner is a distributed Git storage server
 
 License:        BSD
@@ -152,6 +152,9 @@ install %{SOURCE1} %{buildroot}%{_unitdir}
 %{_sysconfdir}/repospanner
 
 %changelog
+* Sat Aug 10 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-11.c6a026e428baaa9b34c8fd54a6f1c0a6f2ae062e.el7.infra
+- Fix request context
+
 * Thu May 02 2019 Patrick Uiterwijk <puiterwijk@redhat.com> - 0.5-10.e4df0439a0f696f71c1f2fee285dc2022d435839.el7.infra
 - Fix race condition for sync db
 - Short-circuit push/sync process on error
